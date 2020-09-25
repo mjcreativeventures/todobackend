@@ -30,7 +30,7 @@ services:
       interval: 3s
       retries: 10
     ports:
-      - 8000:8000
+      - 8000
     volumes:
       - public:/public
     command:
@@ -39,6 +39,9 @@ services:
       - --module=todobackend.wsgi
       - --master
       - --check-static=/public
+      - --die-on-term
+      - --processes=4
+      - --threads=2
   migrate:
     extends:
       service: release
