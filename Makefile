@@ -17,6 +17,7 @@ release:
 	@ echo App running at http://$$(docker-compose port app 8000 | sed s/0.0.0.0/localhost/g)
 
 publish:
+	docker tag mjcv/todobackend:latest 639119023535.dkr.ecr.ap-southeast-1.amazonaws.com/mjcv/todobackend:latest
 	docker tag mjcv/todobackend:latest 639119023535.dkr.ecr.ap-southeast-1.amazonaws.com/mjcv/todobackend:$(APP_VERSION)
 	docker-compose push release app
 
