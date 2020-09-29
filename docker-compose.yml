@@ -14,12 +14,14 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    image: 639119023535.dkr.ecr.ap-southeast-1.amazonaws.com/mjcv/todobackend:latest
     environment:
       DJANGO_SETTINGS_MODULE: todobackend.settings_release
       MYSQL_HOST: db
       MYSQL_USER: todo
       MYSQL_PASSWORD: password
   app:
+    image: 639119023535.dkr.ecr.ap-southeast-1.amazonaws.com/mjcv/todobackend:${APP_VERSION}
     extends:
       service: release
     depends_on:
