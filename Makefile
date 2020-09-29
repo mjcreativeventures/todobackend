@@ -1,4 +1,4 @@
-.PHONY: test clean
+.PHONY: test clean publish
 
 export APP_VERSION ?= $(shell git rev-parse --short HEAD)
 
@@ -15,6 +15,10 @@ release:
 	docker-compose run app python3 manage.py collectstatic --no-input
 	docker-compose up --abort-on-container-exit app
 	@ echo App running at http://$$(docker-compose port app 8000 | sed s/0.0.0.0/localhost/g)
+
+publish:
+	docker tag mjcv/todobackend:latest 639119023535.dkr.ecr.ap-southeast-1.amazonaws.com/mjcv/todobackend:$(APP_VERSION)
+	docker-compose push release app
 
 clean:
 	docker-compose down -v
